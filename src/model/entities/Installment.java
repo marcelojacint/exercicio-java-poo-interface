@@ -6,6 +6,7 @@ public class Installment {
 
 	private Date dueDate;
 	private Double amount;
+	
 
 	public Installment(Date dueDate, Double amount) {
 		this.dueDate = dueDate;

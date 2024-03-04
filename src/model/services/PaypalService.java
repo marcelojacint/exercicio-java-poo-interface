@@ -2,16 +2,19 @@ package model.services;
 
 public class PaypalService implements OnlinePaymentSerice {
 
-	@Override
-	public double Paymentfee(double amount) {
+	public PaypalService() {
+	}
 
-		return amount * 0.01;
+	@Override
+	public double PaymentFee(double amount) {
+
+		return amount * 0.02;
 	}
 
 	@Override
 	public double interest(double amount, int months) {
 
-		return (amount * 0.02) * months;
+		return months * (amount * 0.01);
 	}
 
 }

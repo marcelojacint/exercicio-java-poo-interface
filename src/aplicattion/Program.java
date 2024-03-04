@@ -6,6 +6,11 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
+import model.entities.Contract;
+import model.entities.Installment;
+import model.services.ContractService;
+import model.services.PaypalService;
+
 public class Program {
 
 	public static void main(String[] args) {
@@ -19,10 +24,23 @@ public class Program {
 			System.out.println();
 			System.out.print("numero: ");
 			int number = sc.nextInt();
-			sc.nextLine();
+			System.out.print("data (dd/MM/yyyy): ");
 			Date date = sd.parse(sc.next());
-			System.out.print("valor do cotrato: ");
+			System.out.print("contract: ");
 			double totalValue = sc.nextDouble();
+
+			Contract contract = new Contract(number, date, totalValue);
+
+			System.out.print("entre com o número de parcelas: ");
+			int mounths = sc.nextInt();
+			System.out.println();
+			System.out.println("PARCELAS:");
+			ContractService contractService = new ContractService(new PaypalService());
+			contractService.processContract(contract, mounths);
+
+			for (Installment install : contract.getInstallments()) {
+				System.out.println(sd.format(install.getDueDate()) + " - " + install.getAmount());
+			}
 
 		} catch (ParseException e) {
 
